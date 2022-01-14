@@ -1,0 +1,103 @@
+<div class="page-block">
+    <img class="logo" src="/assets/m257216.png" alt="Company Logo" >
+    <div *ngIf="companyRecord" class="body-block">
+        <div class="company-block">
+            <h2>{{ companyRecord.companyName }}</h2>
+            <span>Created: {{ companyRecord.dateCreated | date:'shortDate' }}</span>
+            <span>Key: {{ companyRecord.id }}</span>
+        </div>
+        <div class="announcements-block">
+            <h4>Announcements</h4>
+            <div class="announcements-table-div">
+                <table *ngIf="companyNotices" class='notices-table table table-striped'>
+                <thead>
+                  <tr>
+                    <th>Active</th>
+                    <th>Subject</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let notice of companyNotices">
+                    <td>{{ notice.noticeHide | decorateBoolean:'reversed' }}</td>
+                    <td>{{ notice.noticeSubject }}</td>
+                    <td>{{ notice.noticeFromDate | date:'shortDate' }}</td>
+                    <td>{{ notice.noticeToDate | date:'shortDate' }}</td>
+                    <td>
+                        <button type="button" class="btn btn-secondary" (click)="editAnnouncement(notice.id);">Edit</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="div-flex-right">
+                <button type="button" class="btn btn-primary" (click)="createAnnouncment()">Create</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Announcement Form -->
+    <div *ngIf="noticeKeyToEdit >= 0" class="notice-record-block">
+        <form [formGroup]="noticeForm" (ngSubmit)="saveNotice()"
+            ngClass="{
+                'has-error': !form.get('name').valid && form.get('name').touched,
+                'has-feedback': !form.get('name').valid && form.get('name').touched
+            }">
+            <input type="hidden" class="form-control" id="id" formControlName="id">
+            <input type="hidden" class="form-control" id="noticeCompanyKey" formControlName="noticeCompanyKey">
+            <div class="form-group row">
+                <span class="col-sm-2"></span>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="active" formControlName="noticeHide">
+                    <label class="form-check-label" for="active">
+                        Visible to Users (Active)
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group row">
+              <label for="subject" class="col-sm-2 col-form-label">Subject</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="subject" formControlName="noticeSubject">
+              </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="message" class="col-sm-2 col-form-label">Message</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" id="message" rows="2" formControlName="message"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="link" class="col-sm-2 col-form-label">URL</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="link" formControlName="noticeLink">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="from" class="col-sm-2 col-form-label">Beginning</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" id="from" formControlName="noticeFromDate">
+                </div>
+
+                <label for="to" class="col-sm-2 col-form-label">Ending</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" id="to" formControlName="noticeToDate">
+                </div>
+            </div>
+
+            <div class="button-bar">
+              <div class="button-bar-left">
+                <button type="button" class="btn btn-light" (click)="cancelEdit()">Cancel</button>
+                <button type="button" class="btn btn-danger" (click)="deleteNotice(id)">Delete</button>
+              </div>
+              <button type="submit" class="btn btn-primary" [disabled]="!noticeForm.valid">Save</button>
+            </div>
+            
+          </form>
+    </div>
+</div>

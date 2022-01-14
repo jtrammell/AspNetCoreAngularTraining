@@ -1,0 +1,81 @@
+.announcements-block {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.announcements-table-div {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.body-block {
+    display: flex;
+    flex-direction: row;
+    gap: 4em;
+    width: 100%;
+}
+
+.button-bar {
+    margin-top: 2em;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    justify-content: space-between;
+    border-top: 1px solid lightgray;
+}
+
+.button-bar-left {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    justify-content: flex-start;
+}
+
+.company-block {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-bottom: 3em;
+}
+
+.logo {
+    width: 300px;
+}
+
+.notice-record-block {
+    width: 100%;
+    max-width: 800px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    background-color: white;
+    padding: 25px;
+    margin-top: 2em;
+}
+
+.notices-table {
+    width: 100%;
+}
+
+.page-block {
+    display: flex;
+    flex-direction: row;
+    gap: 3em;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-top: 2em;
+}
+
+.page-left {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 50%;
+}
+
+.page-right {
+    width: 50%;
+}
